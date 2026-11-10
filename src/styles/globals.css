@@ -1,0 +1,142 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------
+   Ajumogobia & Okeke — Design tokens
+   Midnight navy · charcoal ink · warm ivory · muted bronze
+------------------------------------------------------------------- */
+@theme {
+  --color-midnight-950: #060b16;
+  --color-midnight-900: #0b1426;
+  --color-midnight-800: #121e36;
+  --color-midnight-700: #1b2a48;
+  --color-midnight-600: #2a3c60;
+
+  --color-ink-900: #15181d;
+  --color-ink-800: #1f232a;
+  --color-ink-700: #2e333c;
+  --color-ink-500: #5b616c;
+  --color-ink-400: #808691;
+
+  --color-ivory-50: #fdfbf7;
+  --color-ivory-100: #f8f4ec;
+  --color-ivory-200: #f0eadd;
+  --color-ivory-300: #e4dccb;
+
+  --color-stone-100: #f1f0ed;
+  --color-stone-200: #e3e1dc;
+  --color-stone-300: #cfccc5;
+
+  --color-bronze-300: #d9bf91;
+  --color-bronze-400: #c9a66b;
+  --color-bronze-500: #b8925a;
+  --color-bronze-600: #9a7744;
+  --color-bronze-700: #7a5c33;
+
+  --font-serif: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;-apple-system, 'Segoe UI', sans-serif;
+
+  --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  --text-display: clamp(2.5rem, 1.5rem + 4vw, 5.5rem);
+  --text-headline: clamp(2rem, 1.4rem + 2.4vw, 3.75rem);
+  --text-title: clamp(1.75rem, 1.35rem + 1.5vw, 2.75rem);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ivory-50 font-sans text-ink-800 antialiased;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+
+   .font-serif, h1, h2, h3, h4 {
+    font-variation-settings: 'SOFT' 100, 'WONK' 0;
+  h1, h2, h3, h4 {
+    @apply font-serif font-normal tracking-[-0.02em] text-midnight-900;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { @apply bg-bronze-400/40 text-midnight-900; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-bronze-500);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-3 font-sans text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-bronze-600;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply block h-px w-8 bg-current;
+  }
+  .eyebrow-light { @apply text-bronze-400; }
+
+  .prose-firm { @apply text-[1.0625rem] leading-[1.8] text-ink-700; }
+  .prose-firm p + p { @apply mt-5; }
+  .prose-firm h2 { @apply mt-14 mb-5 text-3xl md:text-[2.4rem] leading-tight; }
+  .prose-firm h3 { @apply mt-10 mb-3 text-2xl; }
+  .prose-firm ul { @apply mt-5 space-y-3; }
+  .prose-firm ul li { @apply relative pl-6; }
+  .prose-firm ul li::before {
+    content: '';
+    @apply absolute left-0 top-[0.8em] h-px w-3 bg-bronze-500;
+  }
+  .prose-firm a { @apply text-midnight-800 underline decoration-bronze-500/60 underline-offset-4 hover:decoration-bronze-600; }
+
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s var(--ease-luxe);
+  }
+  .link-underline:hover, .link-underline:focus-visible { background-size: 100% 1px; }
+
+  .hairline-grid {
+    background-image:
+      linear-gradient(to right, rgb(184 146 90 / 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(184 146 90 / 0.08) 1px, transparent 1px);
+    background-size: 88px 88px;
+  }
+
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.07;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .field-input {
+    @apply w-full border-0 border-b border-stone-300 bg-transparent px-0 py-3 text-base text-ink-900 placeholder:text-ink-400 transition-colors duration-300 focus:border-bronze-500 focus:outline-none focus:ring-0;
+  }
+  .field-input-dark {
+    @apply border-white/25 text-ivory-50 placeholder:text-white/40 focus:border-bronze-400;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .scrollbar-none { scrollbar-width: none; }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+}
