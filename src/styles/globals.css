@@ -32,8 +32,8 @@
   --color-bronze-600: #9a7744;
   --color-bronze-700: #7a5c33;
 
-  --font-serif: 'Fraunces Variable', 'Iowan Old Style', Georgia, serif;
-  --font-sans: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;-apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Fraunces Variable', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans Variable', system-ui, sans-serif;
 
   --ease-luxe: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
@@ -56,8 +56,10 @@
     font-feature-settings: 'ss01', 'cv11';
   }
 
-   .font-serif, h1, h2, h3, h4 {
+  /* Fraunces "SOFT" axis rounds the letter ends for a warmer, friendlier feel. */
+  .font-serif, h1, h2, h3, h4 {
     font-variation-settings: 'SOFT' 100, 'WONK' 0;
+  }
   h1, h2, h3, h4 {
     @apply font-serif font-normal tracking-[-0.02em] text-midnight-900;
     text-wrap: balance;
